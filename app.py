@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import re
@@ -43,7 +42,7 @@ def extract_top_n(query):
 def show_row(row):
     return row[['State','District','Substation','Site','SolarGIS GHI','Metonorm 8.2 GHI','Albedo']]
 
-# --- Query handler (existing logic untouched) ---
+# --- Query handler ---
 def answer_query(q):
     q_lower = q.strip().lower()
     best_type, best_name, best_score = None, None, 0
@@ -117,11 +116,12 @@ if 'query' not in st.session_state:
 
 query = st.text_input("Ask a question about the solar dataset:", value=st.session_state['query'], key="query")
 
-# --- Real-time query execution (no suggestions anymore) ---
+# --- Real-time query execution ---
 if query:
     answer = answer_query(query)
     if isinstance(answer, pd.DataFrame):
         st.dataframe(answer.reset_index(drop=True), use_container_width=True)
     else:
         st.write(answer)
+
 
