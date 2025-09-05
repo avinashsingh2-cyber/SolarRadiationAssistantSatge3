@@ -35,7 +35,7 @@ def fuzzy_match_best(query, choices):
 
 def extract_top_n(query):
     try:
-        return int(re.findall(r"top (\d+)", query.lower())[0])
+        return int(re.findall(r"top (\\d+)", query.lower())[0])
     except:
         return 5
 
